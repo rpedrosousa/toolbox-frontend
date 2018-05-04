@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercício 2</title>
+</head>
+
+<body>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <div id="exercicio2">
+        <div>
+            <button v-on:click="alerta()">Alerta</button>
+            
+        </div>
+        <div>
+            <p>{{ nome }}</p>
+            <input type="text" v-on:input="alteraNome "value="Coloque o nome...">  
+        </div>
+        <div>
+            <input type="text" v-on:keypress="press" value="dalhe gas..">
+            <p>{{ valor }}</p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#exercicio2',
+            data: {
+                nome: 'Exemplo: ',
+                valor: 'As'
+            },
+            methods: {
+                alerta: function(){
+                    return alert("SEU PC FOI HACKEADO")
+                },
+                
+                alteraNome: function(event){
+                    this.nome=event.target.value
+                },
+                press: function(event){
+                    if(event.keyCode===13){
+                        this.valor=event.target.value
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

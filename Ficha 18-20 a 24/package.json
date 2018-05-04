@@ -1,0 +1,21 @@
+{
+  "name": "teste",
+  "version": "1.0.0",
+  "description": "teste teste",
+  "author": "PedroJorge",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "axios": "^0.18.0",
+    "nuxt": "^1.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
+}
