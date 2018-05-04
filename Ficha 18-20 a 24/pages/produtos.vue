@@ -13,42 +13,50 @@
 </template>
 
 <script>
-import axios from'axios';
+import axios from "axios";
 import appFichaProduto from "@/components/app-ficha-produto";
 export default {
   components: {
     appFichaProduto
   },
-  data(){
+  data() {
     return {
-        carrinhoCompras:[],
-        ultimaCompra: false
+      carrinhoCompras: [],
+      ultimaCompra: false
+    };
+  },
+  filters: {
+    formataData(dados) {
+      return dados.toString().slice(0, 10);
     }
   },
-  filters:{
-    formataData(dados){
-      return dados.toString().slice(0,10)
-    }
-  },
-  methods:{
-    carregaCarrinho(artigo){
-      this.carrinhoCompras.unshift({...artigo, dataCompra: new Date()});
-      this.ultimaCompra=this.carrinhoCompras[0].dataCompra;
+  methods: {
+    carregaCarrinho(artigo) {
+      this.carrinhoCompras.unshift({ ...artigo, dataCompra: new Date() });
+      this.ultimaCompra = this.carrinhoCompras[0].dataCompra;
     },
-    sum(){
-      if(this.carrinhoCompras.length < 1){
-        return 0
+    descarregaCarrinho(index) {
+      this.carrinhoCompras.splice(index, 1);
+    },
+    sum() {
+      if (this.carrinhoCompras.length < 1) {
+        return 0;
       } else {
-        return this.carrinhoCompras.map( (a) => Math.floor(a.Valor)).reduce((a,b) => {return a+b})
+        return this.carrinhoCompras
+          .map(a => Math.floor(a.Valor))
+          .reduce((a, b) => {
+            return a + b;
+          });
       }
     }
   },
-  asyncData(){
-      // retornar uma Promessa
-      return axios.get('https://umartigos-49214.firebaseio.com/.json')
-      .then((res) =>{
-          return {artigos: res.data}
-      })
+  asyncData() {
+    // retornar uma Promessa
+    return axios
+      .get("https://umartigos-49214.firebaseio.com/.json")
+      .then(res => {
+        return { artigos: res.data };
+      });
   }
 };
 </script>
@@ -59,12 +67,12 @@ export default {
   align-items: row;
   justify-content: space-around;
 }
-.listaProdutos{
+.listaProdutos {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.listaCarrinhoCompras{
+.listaCarrinhoCompras {
   display: flex;
   min-width: 500px;
   align-items: center;
